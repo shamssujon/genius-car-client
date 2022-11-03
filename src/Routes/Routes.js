@@ -21,6 +21,10 @@ const router = createBrowserRouter([
                 path: "/signup",
                 element: <RegisterPage></RegisterPage>,
             },
+            {
+                path: "*",
+                element: "404 No page found",
+            },
         ],
     },
 ]);
