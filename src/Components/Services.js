@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import ServiceCard from "./ServiceCard";
 import { Link } from "react-router-dom";
+import ServiceCard from "./ServiceCard";
 
 const Services = () => {
     const [services, setServices] = useState([]);

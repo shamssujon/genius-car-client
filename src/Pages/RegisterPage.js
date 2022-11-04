@@ -1,4 +1,7 @@
 import React from "react";
+import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import { Link } from "react-router-dom";
 import image from "../Assets/images/login/login.svg";
 
 const RegisterPage = () => {
@@ -47,10 +50,30 @@ const RegisterPage = () => {
                                     className="input-bordered input w-full"
                                 />
                             </div>
-                            <div className="grid pt-8">
+                            <div className="grid pt-6">
                                 <button className="btn-primary btn">Sign Up</button>
                             </div>
                         </form>
+                        <div className="mt-8 text-center">
+                            <p>Or continue with</p>
+                            <div className="mt-4 flex items-center justify-center gap-2">
+                                <button className="btn-ghost btn-circle btn bg-gray-100">
+                                    <FcGoogle className="h-6 w-6" />
+                                </button>
+                                <button className="btn-ghost btn-circle btn bg-gray-100 text-[#1877F2]">
+                                    <FaFacebookF className="h-6 w-6" />
+                                </button>
+                                <button className="btn-ghost btn-circle btn bg-gray-100 text-[#0A66C2]">
+                                    <FaLinkedinIn className="h-6 w-6" />
+                                </button>
+                            </div>
+                        </div>
+                        <p className="mt-8 text-center">
+                            Already have an account?{" "}
+                            <Link to={"/login"} className="font-semibold text-primary">
+                                Login
+                            </Link>
+                        </p>
                     </div>
 
                     <div className="lg:order-1">

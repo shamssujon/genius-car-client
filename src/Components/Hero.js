@@ -1,10 +1,10 @@
 import React from "react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import { Link } from "react-router-dom";
-import "swiper/css/navigation";
 import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import sliderImg1 from "../Assets/images/homeCarousel/1.jpg";
 import sliderImg2 from "../Assets/images/homeCarousel/2.jpg";
