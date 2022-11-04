@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ServiceCard from "./ServiceCard";
+import { Link } from "react-router-dom";
 
 const Services = () => {
     const [services, setServices] = useState([]);
@@ -25,6 +26,11 @@ const Services = () => {
                     {services.map((service) => (
                         <ServiceCard key={service._id} service={service} />
                     ))}
+                </div>
+                <div className="text-center mt-12">
+                    <Link className="btn-outline btn-primary btn inline-flex h-auto px-6 py-3 text-lg capitalize">
+                        More Services
+                    </Link>
                 </div>
             </div>
         </section>
