@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import image from "../Assets/images/login/login.svg";
+import { AuthContext } from "./../Contexts/AuthProvider";
 
 const RegisterPage = () => {
+    const { createUser } = useContext(AuthContext);
+    // console.log(createUser);
     return (
         <section className="py-10">
             <div className="container">
