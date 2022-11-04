@@ -2,7 +2,7 @@
 [+] Install neccessary packages like react-router-dom, react-hot-toast etc
 [+] Install and configure a css framework
 [+] Setup basic routes, layouts, pages, components
-[-] Create Homepage
+[+] Create Homepage
 [-] Create Login page
 [-] Create Register page
 [-] Create and integrate a Firebase application
