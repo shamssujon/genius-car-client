@@ -1,12 +1,14 @@
 import React from "react";
 import About from "../Components/About";
 import Hero from "../Components/Hero";
+import Services from "../Components/Services";
 
 const HomePage = () => {
     return (
         <div>
-            <Hero></Hero>
-            <About></About>
+            <Hero />
+            <About />
+            <Services />
         </div>
     );
 };

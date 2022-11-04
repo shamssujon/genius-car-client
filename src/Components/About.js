@@ -5,7 +5,7 @@ import aboutImg2 from "../Assets/images/about_us/parts.jpg";
 
 const About = () => {
     return (
-        <section className="py-10 lg:pt-10 lg:pb-32">
+        <section className="py-10 lg:pt-20 lg:pb-40">
             <div className="container">
                 <div className="grid gap-12 lg:grid-cols-2">
                     <div className="relative">
@@ -22,8 +22,8 @@ const About = () => {
                     </div>
                     <div className="space-y-6">
                         <h5 className="text-xl font-bold text-primary">About Us</h5>
-                        <h2 className="text-5xl font-bold leading-tight">
-                            We are qualified & of experience in this field
+                        <h2 className="text-3xl font-bold leading-tight md:text-5xl md:leading-tight">
+                            We are qualified and experienced in this field
                         </h2>
                         <p className="text-gray-500">
                             There are many variations of passages of Lorem Ipsum available, but the
@@ -34,7 +34,7 @@ const About = () => {
                             the majority have suffered alteration in some form, by injected humour,
                             or randomised words which don't look even slightly believable.
                         </p>
-                        <Link className="btn-primary btn h-auto px-6 py-3 text-lg capitalize inline-flex">
+                        <Link className="btn-primary btn inline-flex h-auto px-6 py-3 text-lg capitalize">
                             Get More Info
                         </Link>
                     </div>
