@@ -5,7 +5,7 @@ import ServiceCard from "./ServiceCard";
 const Services = () => {
     const [services, setServices] = useState([]);
     useEffect(() => {
-        fetch("services.json")
+        fetch("http://localhost:7100/services")
             .then((res) => res.json())
             .then((data) => setServices(data));
     }, []);
@@ -27,7 +27,7 @@ const Services = () => {
                         <ServiceCard key={service._id} service={service} />
                     ))}
                 </div>
-                <div className="text-center mt-12">
+                <div className="mt-12 text-center">
                     <Link className="btn-outline btn-primary btn inline-flex h-auto px-6 py-3 text-lg capitalize">
                         More Services
                     </Link>
