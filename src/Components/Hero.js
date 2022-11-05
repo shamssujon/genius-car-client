@@ -20,9 +20,7 @@ const Hero = () => {
                     modules={[Navigation, Pagination, Scrollbar, A11y]}
                     spaceBetween={30}
                     slidesPerView={1}
-                    navigation={{ nextEl: ".arrowRight", prevEl: ".arrowLeft" }}
-                    onSwiper={(swiper) => console.log(swiper)}
-                    onSlideChange={() => console.log("slide change")}>
+                    navigation={{ nextEl: ".arrowRight", prevEl: ".arrowLeft" }}>
                     <SwiperSlide>
                         <div className="relative overflow-hidden rounded-lg p-6 text-white md:p-12 lg:p-24">
                             <img

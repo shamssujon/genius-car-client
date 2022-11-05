@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
@@ -6,15 +6,61 @@ import image from "../Assets/images/login/login.svg";
 import { AuthContext } from "./../Contexts/AuthProvider";
 
 const RegisterPage = () => {
-    const { createUser } = useContext(AuthContext);
-    // console.log(createUser);
+    const { createUser, successToast, errorToast, googleSignIn } = useContext(AuthContext);
+    const [passwordError, setPasswordError] = useState(null);
+
+    const handleSignUp = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const name = form.name.value;
+        const password = form.password.value;
+
+        // Password validation
+        const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$^&*()_-]).{4,20}$/;
+
+        if (!passwordRegex.test(password)) {
+            setPasswordError("Please use Strong Password");
+            return false;
+        } else {
+            setPasswordError(null);
+        }
+
+        // Create user
+        createUser(email, password)
+            .then((result) => {
+                const user = result.user;
+                console.log(user);
+                form.reset();
+                successToast("User created successfully!");
+            })
+            .catch((error) => {
+                console.error(error);
+                errorToast(error.message);
+            });
+    };
+
+    // google sign in
+    const handleGoogleSignIn = () => {
+        googleSignIn()
+            .then((result) => {
+                const user = result.user;
+                console.log(user);
+                successToast("Logged in with google");
+            })
+            .catch((error) => {
+                console.error(error);
+                errorToast(error.message);
+            });
+    };
+
     return (
         <section className="py-10">
             <div className="container">
                 <div className="grid items-center gap-10 lg:grid-cols-2">
                     <div className="rounded-lg border p-8 md:p-12 lg:order-2 lg:p-20">
                         <h2 className="mb-8 text-center text-3xl font-bold lg:text-4xl">Sign Up</h2>
-                        <form className="space-y-4">
+                        <form onSubmit={handleSignUp} className="space-y-4">
                             <div className="form-control w-full">
                                 <label className="label font-semibold" htmlFor="name">
                                     <span>Name</span>
@@ -52,6 +98,11 @@ const RegisterPage = () => {
                                     placeholder="Your password"
                                     className="input-bordered input w-full"
                                 />
+                                {passwordError && (
+                                    <label className="label">
+                                        <span className="label-text-alt">{passwordError}</span>
+                                    </label>
+                                )}
                             </div>
                             <div className="grid pt-6">
                                 <button className="btn-primary btn">Sign Up</button>
@@ -60,7 +111,9 @@ const RegisterPage = () => {
                         <div className="mt-8 text-center">
                             <p>Or continue with</p>
                             <div className="mt-4 flex items-center justify-center gap-2">
-                                <button className="btn-ghost btn-circle btn bg-gray-100">
+                                <button
+                                    onClick={handleGoogleSignIn}
+                                    className="btn-ghost btn-circle btn bg-gray-100">
                                     <FcGoogle className="h-6 w-6" />
                                 </button>
                                 <button className="btn-ghost btn-circle btn bg-gray-100 text-[#1877F2]">

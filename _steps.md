@@ -7,7 +7,7 @@
 [+] Create Register page
 [+] Create and integrate a Firebase application
 [+] Setup environment variable
-[-] Create Context 
-[-] Create authentication functions
-[-] Use authentication functions
+[+] Create Context 
+[+] Create authentication functions
+[+] Use authentication functions
 
