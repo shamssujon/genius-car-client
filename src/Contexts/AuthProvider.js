@@ -64,7 +64,16 @@ const AuthProvider = ({ children }) => {
         };
     }, []);
 
-    const value = { createUser, user, loading, successToast, errorToast, loginUser, logOut, googleSignIn };
+    const value = {
+        createUser,
+        user,
+        loading,
+        successToast,
+        errorToast,
+        loginUser,
+        logOut,
+        googleSignIn,
+    };
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 

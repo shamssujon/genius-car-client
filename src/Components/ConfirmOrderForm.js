@@ -2,12 +2,49 @@ import React, { useContext } from "react";
 import { AuthContext } from "../Contexts/AuthProvider";
 
 const ConfirmOrderForm = ({ serviceData }) => {
-    const { _id } = serviceData;
-    const { user } = useContext(AuthContext);
+    const { user, successToast } = useContext(AuthContext);
+    const { _id, title, price } = serviceData;
+
+    const handlePlaceOrder = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const name = `${form.firstName.value} ${form.lastName.value}`;
+        const phone = form.phone.value;
+        const email = user?.email || form.email.value;
+        const message = form.message.value;
+
+        const order = {
+            serviceId: _id,
+            serviceTitle: title,
+            price,
+            customerName: name,
+            customerPhone: phone,
+            customerEmail: email,
+            customerMessage: message,
+        };
+
+        fetch(`http://localhost:7100/order`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(order),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                if (data.acknowledged) {
+                    successToast("Order placed succcesfully");
+                }
+            })
+            .catch((error) => console.error(error));
+    };
     return (
-        <section className="py-10 md:py-20">
+        <section className="py-10">
             <div className="container">
-                <form className="grid gap-6 rounded-lg bg-base-200 p-8 md:grid-cols-2 md:p-12 lg:p-20">
+                <form
+                    onSubmit={handlePlaceOrder}
+                    className="grid gap-6 rounded-lg bg-base-200 p-8 md:grid-cols-2 md:p-12 lg:p-20">
                     <div className="form-control">
                         <input
                             name="firstName"
@@ -26,6 +63,7 @@ const ConfirmOrderForm = ({ serviceData }) => {
                     </div>
                     <div className="form-control">
                         <input
+                            required
                             name="phone"
                             type="tel"
                             placeholder="Your Phone"
@@ -34,11 +72,12 @@ const ConfirmOrderForm = ({ serviceData }) => {
                     </div>
                     <div className="form-control">
                         <input
+                            required
                             name="email"
                             type="email"
                             placeholder="Your Email"
                             defaultValue={user?.email}
-                            readOnly
+                            readOnly={user ? true : false}
                             className="input-bordered input w-full"
                         />
                     </div>

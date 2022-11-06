@@ -94,7 +94,7 @@ const Header = () => {
                                         <Link>Profile</Link>
                                     </li>
                                     <li>
-                                        <Link>Orders</Link>
+                                        <Link to={"/orders"}>Orders</Link>
                                     </li>
                                     <li>
                                         <Link>Manage Orders</Link>
@@ -107,8 +107,8 @@ const Header = () => {
                             </div>
                         </div>
                     ) : (
-                        <Link to={"/signup"} className="btn-outline btn-primary btn">
-                            Sign Up
+                        <Link to={"/login"} className="btn-outline btn-primary btn">
+                            Log in
                         </Link>
                     )}
                 </div>
