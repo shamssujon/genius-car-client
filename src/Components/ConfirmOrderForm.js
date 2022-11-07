@@ -12,6 +12,7 @@ const ConfirmOrderForm = ({ serviceData }) => {
         const phone = form.phone.value;
         const email = user?.email || form.email.value;
         const message = form.message.value;
+        const dateAdded = null;
 
         const order = {
             serviceId: _id,
@@ -21,6 +22,7 @@ const ConfirmOrderForm = ({ serviceData }) => {
             customerPhone: phone,
             customerEmail: email,
             customerMessage: message,
+            dateAdded,
         };
 
         fetch(`http://localhost:7100/order`, {

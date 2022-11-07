@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import Orders from "../Components/Orders";
 import PageHeader from "../Components/PageHeader";
 import { AuthContext } from "../Contexts/AuthProvider";
 
@@ -16,7 +17,10 @@ const OrdersPage = () => {
     return (
         <div>
             <PageHeader PageHeaderTitle={"Orders"}></PageHeader>
-            <p>You have {orders.length} orders</p>
+            <h4 className="pt-10 text-center text-2xl font-bold">
+                You have {orders.length} orders
+            </h4>
+            <Orders orders={orders}></Orders>
         </div>
     );
 };
