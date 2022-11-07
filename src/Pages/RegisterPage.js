@@ -1,13 +1,17 @@
 import React, { useContext, useState } from "react";
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import image from "../Assets/images/login/login.svg";
 import { AuthContext } from "./../Contexts/AuthProvider";
 
 const RegisterPage = () => {
     const { createUser, successToast, errorToast, googleSignIn } = useContext(AuthContext);
     const [passwordError, setPasswordError] = useState(null);
+
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || "/";
 
     const handleSignUp = (e) => {
         e.preventDefault();
@@ -47,6 +51,9 @@ const RegisterPage = () => {
                 const user = result.user;
                 console.log(user);
                 successToast("Logged in with google");
+
+                // Navigate user back to where they came from
+                navigate(from, { replace: true });
             })
             .catch((error) => {
                 console.error(error);

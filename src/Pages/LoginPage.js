@@ -40,6 +40,9 @@ const LoginPage = () => {
                 const user = result.user;
                 console.log(user);
                 successToast("Logged in with google");
+                
+                // Navigate user back to where they came from
+                navigate(from, { replace: true });
             })
             .catch((error) => {
                 console.error(error);
