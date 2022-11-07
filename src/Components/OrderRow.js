@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BsX } from "react-icons/bs";
+import { AuthContext } from "../Contexts/AuthProvider";
 
 const OrderRow = ({ order }) => {
-    const { serviceId, serviceTitle, price, dateAdded } = order;
+    const { successToast } = useContext(AuthContext);
+    const { _id, serviceId, serviceTitle, price, dateAdded } = order;
     const [orderService, setOrderService] = useState({});
 
     useEffect(() => {
@@ -10,10 +12,30 @@ const OrderRow = ({ order }) => {
             .then((res) => res.json())
             .then((data) => setOrderService(data));
     }, [serviceId]);
+
+    const handleDelete = (id) => {
+        const confirmDelete = window.confirm(`Want to delete ${serviceTitle}?`);
+
+        if (confirmDelete) {
+            fetch(`http://localhost:7100/order/${id}`, {
+                method: "DELETE",
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log(data);
+                    if (data.deletedCount > 0) {
+                        successToast(`Deleted ${serviceTitle} successfully`);
+                    }
+                })
+                .catch((error) => console.error(error));
+        }
+    };
     return (
         <tr>
             <td>
-                <button className="btn-outline h-6 w-6 rounded-full bg-rose-100 p-0 text-rose-600 transition hover:bg-rose-600 hover:text-white">
+                <button
+                    onClick={() => handleDelete(_id)}
+                    className="btn-outline h-6 w-6 rounded-full bg-rose-100 p-0 text-rose-600 transition hover:bg-rose-600 hover:text-white">
                     <BsX className="h-6 w-6" />
                 </button>
             </td>
