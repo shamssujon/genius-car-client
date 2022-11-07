@@ -28,6 +28,9 @@ const OrdersPage = () => {
                     console.log(data);
                     if (data.deletedCount > 0) {
                         successToast(`Deleted successfully`);
+
+                        const remaining = orders.filter((order) => order._id !== id);
+                        setOrders(remaining);
                     }
                 })
                 .catch((error) => console.error(error));
