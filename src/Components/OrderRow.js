@@ -2,8 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { BsX } from "react-icons/bs";
 import { AuthContext } from "../Contexts/AuthProvider";
 
-const OrderRow = ({ order }) => {
+const OrderRow = ({ order, handleDelete }) => {
     const { successToast } = useContext(AuthContext);
+
+    // Show Order Details
     const { _id, serviceId, serviceTitle, price, dateAdded } = order;
     const [orderService, setOrderService] = useState({});
 
@@ -13,6 +15,7 @@ const OrderRow = ({ order }) => {
             .then((data) => setOrderService(data));
     }, [serviceId]);
 
+    // Delete a order
     const handleDelete = (id) => {
         const confirmDelete = window.confirm(`Want to delete ${serviceTitle}?`);
 
