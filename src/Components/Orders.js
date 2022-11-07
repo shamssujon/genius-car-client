@@ -1,6 +1,6 @@
 import React from "react";
 import OrderRow from "./OrderRow";
-const Orders = ({ orders }) => {
+const Orders = ({ orders, handleDelete }) => {
     return (
         <section className="py-10">
             <div className="container">
@@ -12,12 +12,15 @@ const Orders = ({ orders }) => {
                                 <th>Service</th>
                                 <th>Price</th>
                                 <th>Order date</th>
-                                <th>Actions</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             {orders.map((order) => (
-                                <OrderRow key={order._id} order={order}></OrderRow>
+                                <OrderRow
+                                    key={order._id}
+                                    order={order}
+                                    handleDelete={handleDelete}></OrderRow>
                             ))}
                         </tbody>
                     </table>

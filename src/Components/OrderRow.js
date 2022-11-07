@@ -1,10 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsX } from "react-icons/bs";
-import { AuthContext } from "../Contexts/AuthProvider";
 
 const OrderRow = ({ order, handleDelete }) => {
-    const { successToast } = useContext(AuthContext);
-
     // Show Order Details
     const { _id, serviceId, serviceTitle, price, dateAdded } = order;
     const [orderService, setOrderService] = useState({});
@@ -15,24 +12,6 @@ const OrderRow = ({ order, handleDelete }) => {
             .then((data) => setOrderService(data));
     }, [serviceId]);
 
-    // Delete a order
-    const handleDelete = (id) => {
-        const confirmDelete = window.confirm(`Want to delete ${serviceTitle}?`);
-
-        if (confirmDelete) {
-            fetch(`http://localhost:7100/order/${id}`, {
-                method: "DELETE",
-            })
-                .then((res) => res.json())
-                .then((data) => {
-                    console.log(data);
-                    if (data.deletedCount > 0) {
-                        successToast(`Deleted ${serviceTitle} successfully`);
-                    }
-                })
-                .catch((error) => console.error(error));
-        }
-    };
     return (
         <tr>
             <td>
@@ -49,7 +28,7 @@ const OrderRow = ({ order, handleDelete }) => {
                     </div>
                     <div>
                         <div className="font-bold">{serviceTitle}</div>
-                        <div className="text-sm opacity-50">United States</div>
+                        <div className="text-sm opacity-50">Quantity: 1</div>
                     </div>
                 </div>
             </td>
