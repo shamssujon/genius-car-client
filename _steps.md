@@ -11,3 +11,6 @@
 [+] Create authentication functions
 [+] Use authentication functions
 
+<!-- Token -->
+Create token when signing in
+verify token when accessing data
