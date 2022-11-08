@@ -20,13 +20,13 @@ const LoginPage = () => {
 
         loginUser(email, password)
             .then((result) => {
+                successToast("Logged in successfully");
+
                 const user = result.user;
 
                 const currentUser = {
                     email: user.email,
                 };
-                console.log(currentUser);
-                successToast("Logged in successfully");
 
                 fetch("http://localhost:7100/jwt", {
                     method: "POST",
@@ -35,13 +35,12 @@ const LoginPage = () => {
                 })
                     .then((res) => res.json())
                     .then((data) => {
-                        console.log(data);
                         // localStorage is the easiest but not the best place to store jwt token
                         localStorage.setItem("genius-token", data.token);
-                    });
 
-                // Navigate user back to where they came from
-                // navigate(from, { replace: true });
+                        // Navigate user back to where they came from
+                        navigate(from, { replace: true });
+                    });
             })
             .catch((error) => {
                 console.error(error);

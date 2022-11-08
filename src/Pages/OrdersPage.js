@@ -5,11 +5,18 @@ import { AuthContext } from "../Contexts/AuthProvider";
 
 const OrdersPage = () => {
     const { user, successToast } = useContext(AuthContext);
+
+    // Load user specific orders
     const [orders, setOrders] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:7100/orders?email=${user?.email}`)
+        fetch(`http://localhost:7100/orders?email=${user?.email}`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem("genius-token")}`,
+            },
+        })
             .then((res) => res.json())
             .then((data) => {
+                console.log("load user specific data: ", data);
                 setOrders(data);
             })
             .catch((error) => console.error(error));
