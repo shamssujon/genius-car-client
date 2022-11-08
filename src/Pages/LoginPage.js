@@ -21,11 +21,27 @@ const LoginPage = () => {
         loginUser(email, password)
             .then((result) => {
                 const user = result.user;
-                console.log(user);
+
+                const currentUser = {
+                    email: user.email,
+                };
+                console.log(currentUser);
                 successToast("Logged in successfully");
 
+                fetch("http://localhost:7100/jwt", {
+                    method: "POST",
+                    headers: { "content-type": "application/json" },
+                    body: JSON.stringify(currentUser),
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log(data);
+                        // localStorage is the easiest but not the best place to store jwt token
+                        localStorage.setItem("genius-token", data.token);
+                    });
+
                 // Navigate user back to where they came from
-                navigate(from, { replace: true });
+                // navigate(from, { replace: true });
             })
             .catch((error) => {
                 console.error(error);
@@ -40,7 +56,7 @@ const LoginPage = () => {
                 const user = result.user;
                 console.log(user);
                 successToast("Logged in with google");
-                
+
                 // Navigate user back to where they came from
                 navigate(from, { replace: true });
             })
