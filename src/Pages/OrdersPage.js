@@ -4,7 +4,7 @@ import PageHeader from "../Components/PageHeader";
 import { AuthContext } from "../Contexts/AuthProvider";
 
 const OrdersPage = () => {
-    const { user, successToast } = useContext(AuthContext);
+    const { user, successToast, logOut } = useContext(AuthContext);
 
     // Load user specific orders
     const [orders, setOrders] = useState([]);
@@ -14,13 +14,20 @@ const OrdersPage = () => {
                 authorization: `Bearer ${localStorage.getItem("genius-token")}`,
             },
         })
-            .then((res) => res.json())
+            .then((res) => {
+                if (res.status === 401 || res.status === 403) {
+                    logOut()
+                        .then(() => {})
+                        .catch(() => {});
+                }
+                return res.json();
+            })
             .then((data) => {
                 console.log("load user specific data: ", data);
                 setOrders(data);
             })
             .catch((error) => console.error(error));
-    }, [user?.email]);
+    }, [user?.email, logOut]);
 
     // Delete a order
     const handleDelete = (id) => {
